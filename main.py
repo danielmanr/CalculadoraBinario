@@ -23,6 +23,7 @@ def binarioADecimal():
             cont += 1
             continue
     print("su numero en decimal es:\n" + str(decimal))
+    print("********")
 
 
 
