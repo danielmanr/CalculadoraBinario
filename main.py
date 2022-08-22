@@ -1,15 +1,32 @@
 import numpy as np
 def menu():
     print("*****Bienvenido*****")
-    print("1. Decimal a Binario")
-    print("2. Binario a Decimal")
-    print("3. Decimal a Hexadecimal")
-    opc = input("Digite una Opcion:\n")
+    print("Digite una Opcion para la Unidad de Entrada:\n")
+    print("1. Decimal")
+    print("2. Binario")
+    print("3. Hexadecimal")
+    print("4. Octal")
+    print("5. Salir")
+    opc = input()
     return opc
 
+def decimalAOctal(decimal):
+    oct = []
+    while decimal > 0:
+        residuo = int(decimal % 8)
+        oct.append(residuo)
+        decimal = int(decimal / 8)
+    impresionOctal = oct[::-1]
+    vlr = ""
+    for i in impresionOctal:
+        istring = str(i)
+        vlr += istring
+    vlr = int(vlr)
+    return vlr
 
-def decimalAHexadecimal():
-    decimal = int(input("Ingrese el decimal a convertir:\n"))
+
+
+def decimalAHexadecimal(decimal):
     hexa = []
     resultado = ""
     while decimal >= 1:
@@ -39,13 +56,12 @@ def decimalAHexadecimal():
             continue
         else:
             resultado = resultado + i
-    print(resultado)
+    return resultado
 
 
-def binarioADecimal():
+def binarioADecimal(binario):
     decimal = 0
     cont = 0
-    binario = input("Digite su numero binario:\n")
     invertidoBinario = binario[::-1]
     for i in invertidoBinario:
         if i == "1":
@@ -54,32 +70,45 @@ def binarioADecimal():
         elif i == "0":
             cont += 1
             continue
-    print("su numero en decimal es:\n" + str(decimal))
+    return decimal
 
 
-def decimalABinario():
-    decimal = int(input("Ingrese el decimal a convertir:\n"))
+def decimalABinario(decimal):
     bina = []
     while decimal >= 1:
         if decimal % 2 == 0:
             bina.append("0")
-            decimal = decimal / 2
+            decimal = int(decimal / 2)
         else:
             bina.append("1")
-            decimal = decimal / 2
+            decimal = int(decimal / 2)
     impresionBinario = bina[::-1]
     vlr = ""
     for i in impresionBinario:
         vlr += i
-    print("Su numero binario es:\n "+ vlr)
+    vlr = int(vlr)
+    return vlr
 
 
 def run():
     opcion = menu()
     if opcion == "1":
-        decimalABinario()
+        decimal = int(input("Digite el Valor Decimal: \n"))
+        binario = decimalABinario(decimal)
+        hexadecimal = decimalAHexadecimal(decimal)
+        octal = decimalAOctal(decimal)
+        print("Su valor en Binario es: " + str(binario) + "\n")
+        print("Su Valor en Hexadecimal es: " + str(hexadecimal) + "\n")
+        print("Su Valor en Octal es : " + str(octal) + "\n")
     elif opcion == "2":
-        binarioADecimal()
+        binario = input("Digite el Valor Binario: \n")
+        decimal = binarioADecimal(binario)
+        hexadecimal = decimalAHexadecimal(decimal)
+        octal = decimalAOctal(decimal)
+        print("Su Valor en Decimal es : " + str(decimal) + "\n")
+        print("Su Valor en Hexadecimal es: " + hexadecimal + "\n")
+        print("Su Valor en Octal es : " + str(octal) + "\n")
+
     elif opcion == "3":
         decimalAHexadecimal()
 
